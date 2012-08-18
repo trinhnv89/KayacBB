@@ -1,0 +1,48 @@
+package Kayac::Forum::Controller::Hello;
+use Moose;
+use namespace::autoclean;
+
+BEGIN { extends 'Catalyst::Controller'; }
+
+=head1 NAME
+
+Kayac::Forum::Controller::Hello - Catalyst Controller
+
+=head1 DESCRIPTION
+
+Catalyst Controller.
+
+=head1 METHODS
+
+=cut
+
+
+=head2 index
+
+=cut
+
+sub index :Path :Args(1) {
+    my ( $self, $c, @args ) = @_;
+    
+    my $word = $args[0] || 'Default word';    
+
+    $c->stash->{word} = $word;
+
+    #$c->response->body('Matched Kayac::Forum::Controller::Hello in Hello.');
+}
+
+
+=head1 AUTHOR
+
+Trinh,,,
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
+
+__PACKAGE__->meta->make_immutable;
+
+1;

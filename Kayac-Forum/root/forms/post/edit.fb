@@ -1,0 +1,11 @@
+name: post_edit
+method: post
+fields:
+    postbody:
+        label: Body
+        type: textarea
+        size: 80
+        required: 1
+    thread:
+        label: thread id
+        type: hidden 

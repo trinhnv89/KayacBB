@@ -1,0 +1,10 @@
+name: post_add
+method: post
+fields:
+    postbody:
+        label: Reply
+        type: textarea
+        required: 1
+    thread:
+        label: thread id
+        type: hidden 

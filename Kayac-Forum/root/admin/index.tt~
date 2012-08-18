@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>[% title %]</title>
+	<link rel="stylesheet" href="/general.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/view.css" type="text/css" media="screen" />
+</head>
+<body>
+	<table id="table_logo">
+	<tr>
+	<td id="logo_content_td">
+		<div id="logo">
+			<div class="content"><a href="/admin">Kayac Forum - Administrator</a></div>
+		</div>
+	</td>
+	<td id="user_info">
+		<div  id="div_user_info">
+		[% IF username %]
+			<p>Chào [% username %] |  <a href="/logout">Thoát</a></p>
+		[% ELSE %]
+			<a href="/login">Login</a>
+		[% END %]
+		</div>
+	</td>
+	</tr>
+	</table>
+<div id="wrapper">
+<table>
+<tr>
+<td>
+<div class="admin_ttp"><a href="/topic">Topic</a></div>
+</td>
+<td>
+<div class="admin_ttp"><a href="/thread">Thread</a></div>
+</td>
+<td>
+<div class="admin_ttp"><a href="/post">Post</a></div>
+</td>
+</tr>
+</table>	
+
+</div>
+<div id="footer">
+<div class="infor">
+<p class="infor_name">Power by Trinh Nguyen, Kayac, Japan </p>
+<p>SDT: (+84) 169 6312 096</p>	
+<div>
+</div>
+</body>
+</html>

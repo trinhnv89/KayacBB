@@ -1,0 +1,14 @@
+name: thread_edit
+method: post
+fields:
+    threadtitle:
+        label: タイトル
+        type: text
+        required: 1
+    threadcontent:
+        label: ボディ
+        type: textarea
+	required: 1
+    topic:
+        label: Topic id
+        type: hidden

@@ -1,0 +1,10 @@
+<html>
+<head>
+[% META title = "Register Account" %]
+<title>アカウントを登録する</title>
+</head>
+
+<body>
+<p>[% message %]</p> <br/>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>[% title %]</title>
+	<link rel="stylesheet" href="/general.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/view.css" type="text/css" media="screen" />
+</head>
+<body>
+	<table id="table_logo">
+	<tr>
+	<td id="logo_content_td">
+		<div id="logo">
+			<div class="content"><a href="/admin">Kayac BB - 管理者</a></div>
+		</div>
+	</td>
+	<td id="user_info">
+		<div  id="div_user_info">
+		[% IF username %]
+			<p>こんにちは [% username %] さん |  <a href="/logout">ログアウト</a></p>
+		[% ELSE %]
+			<a href="/login">ログイン</a>
+		[% END %]
+		</div>
+	</td>
+	</tr>
+	</table>
+<div id="wrapper">
+<div id="back_button">
+<a href="/topic/edit">新しいトピック</a>  |  <a href="/admin">バック</a>
+</div>
+<table>
+<tr class="header_topic">
+<td class="topic_name">すべてのトピック</td>
+<td id="new_thread_button"></td>
+</tr>
+	[% WHILE (topic = topics.next) %]
+<tr class="body_topic">
+<td class="topic_name2">
+	<div class="title_topic"><a href="/thread/[% topic.topic_id %]">[% topic.topic_name %]</a></div>
+	<div class="description_topic">[% topic.topic_description%]</div> 
+</td>
+<td class="lastest_thread">
+        <div class="edit_link"><a href="/topic/edit/[% topic.topic_id %]">編集</a> | 
+        <a href="/topic/delete/[% topic.topic_id %]">削除する</a></div>
+</td>
+</tr>
+	[% END %]
+
+</table>
+</div>
+<div id="footer">
+<div class="infor">
+<p class="infor_name">Trinh Nguyen、KAYAC著作権</p>
+<p>携帯電話: (+84) 169 6312 096</p>	
+<div>
+</div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>[% title %]</title>
+	<link rel="stylesheet" href="general.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="view.css" type="text/css" media="screen" />
+</head>
+<body>
+	<table id="table_logo">
+	<tr>
+	<td id="logo_content_td">
+		<div id="logo">
+			<div class="content"><a href="/">Kayac BB</a></div>
+		</div>
+	</td>
+	<td id="user_info">
+		<div  id="div_user_info">
+		[% IF username %]
+			<p>こんにちは [% username %] さん |  <a href="/logout">ログアウト</a></p>
+		[% ELSE %]
+			<a href="/login">ログイン</a>
+		[% END %]
+		</div>
+		<div>
+		<form action="/search" method="get" id="global_search"> 
+			<input type="submit" value="検索" id="button_search"/>
+			<input type="text" name="query" id="search_box"/>
+		</form>
+		</div>
+	</td>
+	</tr>
+	</table>
+<div id="wrapper">
+[% IF mode == 1 && topics %]
+<table>
+<tr class="header_topic">
+<td class="topic_name">Kayac BB</td>
+<td class="number_thread"></td>
+<td class="lastest_thread">最新のスレッド</td>
+</tr>
+	[% WHILE (topic = topics.next) %]
+<tr class="body_topic">
+<td class="topic_name">
+	<div class="title_topic"><a href="/view?topic=[% topic.topic_id %]">[% topic.topic_name %]</a></div>
+	<div class="description_topic">[% topic.topic_description%]</div> 
+
+</td>
+<td class="number_thread">
+	スレッド: [%  topic.total_thread %]
+</td>
+	[% newest_thread = topic.lastest_thread %]
+<td class="lastest_thread">
+	<div class="title_thread_newest"><a href="/view?topic=[% topic.topic_id %]&thread=[% newest_thread.thread_id %]">[% newest_thread.thread_title %]</a></div>
+        <div class="thread_create_by">[% newest_thread.created_by.user_name %]</div>
+	<div class="time_create_thread">[% newest_thread.thread_created_date %]</div>
+        
+</td>
+</tr>
+	[% END %]
+
+</table>
+[% END %]
+
+
+<!----------------- MODE 2 -------------------------->
+
+[% IF mode == 2 %]
+<div class="div_title_content_site">
+	<a href="/">Kayac BB</a> > <a href="/view?topic=[% topic.topic_id %]">[% topic.topic_name %]</a>
+</div>
+
+<table>
+<tr>
+<td id="name_forum_thread">
+<div class="div_topic_title_b">
+フォーラム: [% topic.topic_name %]
+</div>
+</td>
+<td id="new_thread">
+[% IF username %]
+<div id="new_thread_button">
+	<a href="/edit_thread?topic=[% topic.topic_id %]">新しいスレッド</a>
+</div>
+[% END %]
+</td>
+</tr>
+</table>
+
+
+
+<table>
+<tr class="header_topic">
+<td class="topic_name">スレッド/人スタートのスレッド</td>
+<td class="number_thread">返信</td>
+<td class="lastest_thread">最新の投稿</td>
+</tr>
+	[% FOREACH thread IN threads %]
+<tr class="body_topic">
+<td class="topic_name">
+	<div class="title_thread">
+	[% IF thread.new_thread %]
+		<div id="mark_new">New</div>
+	[% END %]
+		<a href="/view?topic=[% topic.topic_id %]&thread=[% thread.thread_id %]">[% thread.thread_title %]</a>
+	</div>
+	<div class="started_thread">[% thread.created_by.user_name%], [% thread.print_created_date%]</div> 
+
+</td>
+<td class="number_thread">
+	返信: [%  thread.total_post - 1 %]
+</td>
+	[% lastest_post = thread.lastest_post %]
+<td class="lastest_thread">
+        <div class="post_create_by">[% lastest_post.post_owner.user_name %]</div>
+	<div class="time_create_post">[% lastest_post.print_created_date %]</div>
+        
+</td>
+</tr>
+	[% END %]
+
+</table>
+
+
+<div id="pagging">
+<!-----Begin page button---->
+<table id="page_table_main">
+<tr>
+[% IF page != 1 %]
+	<td class="page_table"><div id="begin_page"><a href="/view?topic=[% topic.topic_id %]">開始ページ</a></div></td>
+	<td class="page_table"><div id="pre_page"><a href="/view?topic=[% topic.topic_id %]&page=[% page - 1 %]">前のページ</a></div></td>
+[% END %]
+
+[% IF page != number_page %]
+	<td class="page_table"> <div id="next_page"><a href="/view?topic=[% topic.topic_id %]&page=[% page + 1 %]">次のページ</a></div></td>
+	<td class="page_table"><div id="last_page"><a href="/view?topic=[% topic.topic_id %]&page=[% number_page %]">最終ページ</a></div></td>
+[% END %]
+</tr>
+</table>
+</div>
+
+[% END %]
+
+[% IF mode == 3 %]
+<div class="div_title_content_site">
+	<div id="title_b">
+	<a href="/">Kayac BB</a> > <a href="/view?topic=[% topic.topic_id %]">[% topic.topic_name %]</a> > <a href="/view?topic=[% topic.topic_id %]&thread=[% thread.thread_id %]">[% thread.thread_title %]</a> 
+</div></div>
+<div class="div_topic_title_b">
+	スレッド: <a href="/view?topic=[% topic.topic_id %]&thread=[% thread.thread_id %]">[% thread.thread_title %]</a>
+</div>
+
+<table>
+		[% count = (page - 1) * post_per_page + 1 %]
+		[% WHILE (post = posts.next) %]
+<tr class="header_topic">
+	<td class="td_created_date_post">
+		[% post.post_created_date | html %]
+	</td>
+	<td class="td_count">
+		#[% count %]
+	</td>
+</tr>
+<tr class="body_topic">
+	<td class="td_user_info">
+		<!--avatar user-->
+		<div class="user_name_post">
+		[% post.post_owner.user_name %]
+		</div>
+		<div>
+		参加日: [% post.post_owner.created_date %]
+		</div>
+	</td>
+	<td class="td_post_body">
+		<!--- post infor ---->
+		<div class="div_post_body">
+		[% post.post_body %]
+		</div>
+
+		[% IF username == post.post_owner.user_name || role == 'administrator' %]
+		<div class="div_modifier">		
+			<!----<div class="div_edit_post">
+				<a href='/edit?post=[%post.post_id%]'>Edit</a>
+			</div> -->
+			<div class="div_delete_post">
+				<a href='/delete?post=[%post.post_id%]&page=[% page %]'>削除する</a>
+			</div>
+		</div>
+		[% END %]
+	</td>
+</tr>
+		[% count = count + 1 %]
+		[% END %]
+</table>
+
+<div id="pagging">
+<!-----Begin page button---->
+<table id="page_table_main">
+<tr>
+[% IF page != 1 %]
+	<td class="page_table"><div id="begin_page"><a href="/view?topic=[% topic.topic_id %]&thread=[%thread.thread_id%]">開始ページ</a></div></td>
+	<td class="page_table"><div id="pre_page"><a href="/view?topic=[% topic.topic_id %]&thread=[% thread.thread_id %]&page=[% page - 1 %]">前のページ</a></div></td>
+[% END %]
+
+[% IF page != number_page %]
+	<td class="page_table"> <div id="next_page"><a href="/view?topic=[% topic.topic_id %]&thread=[% thread.thread_id %]&page=[% page + 1 %]">次のページ</a></div></td>
+	<td class="page_table"><div id="last_page"><a href="/view?topic=[% topic.topic_id %]&thread=[% thread.thread_id %]&page=[% number_page %]">最終ページ</a></div></td>
+[% END %]
+</tr>
+</table>
+</div>
+
+
+<div id="lable_reply_thread">返信: </div>
+<div id="reply_thread">
+<form action='/view?topic=[% topic.topic_id %]&thread=[% thread.thread_id %]' method='post' enctype="multipart/form-data">
+	<textarea rows="5" value='' name='post_content' class='ip_post_content'></textarea><br />
+        <div class="file_upload_thread">
+		<input type='file' name="file"/>
+	</div><br/>
+	<input type='submit' value='提出する' class='submit_post' />
+        <input type='hidden' value=[% page %]/>
+</form>
+</div>
+[% END %]
+</div>
+<div id="footer">
+<div class="infor">
+<p class="infor_name">Trinh Nguyen、KAYAC著作権</p>
+<p>携帯電話: (+84) 169 6312 096</p>	
+</div>
+</div>
+</body>
+</html>
+
+
+
+

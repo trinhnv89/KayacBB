@@ -1,0 +1,14 @@
+name: topic_edit
+method: post
+fields:
+    topicname:
+        label: トピック名
+        type: text
+        size: 50
+        required: 1
+    description:
+        label: 説明
+    	type: textarea
+	rows: 5
+ 
+        

@@ -1,0 +1,14 @@
+name: thread_edit
+method: post
+fields:
+    threadtitle:
+        label: Thread title
+        type: text
+        size: 50
+        required: 1
+    active:
+        label: Active
+        type: checkbox
+    topic:
+        label: Topic id
+        type: hidden 

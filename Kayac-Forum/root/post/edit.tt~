@@ -1,0 +1,15 @@
+<html>
+<head>
+[% META title = "Edit thread" %]
+<title>スレッドを編集します</title>
+</head>
+
+<body>
+<p>トピック: [% topic.topic_name %]</p>
+
+[% IF not_render_form != 1 %]
+	[%FormBuilder.render%]
+[% END %]
+<p>[% message %]</p>
+</body>
+</html>

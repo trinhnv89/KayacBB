@@ -1,0 +1,7 @@
+<html>
+<body>
+[% username %]
+
+<a href='/topic'>Topic</a>
+</body>
+</html>
